@@ -1,7 +1,7 @@
 version: '3.3'
 services: 
   gitlab:
-    image: 'gitlab/gitlab-ce'
+    image: 'gitlab/gitlab-ce:11.11.8-ce.0'
     volumes: 
       - ./gitlab/config:/etc/gitlab
       - ./gitlab/logs:/var/log/gitlab
@@ -12,9 +12,11 @@ services:
     restart: unless-stopped
 
   jenkins:
-    image: 'jenkins/jenkins:lts'
+    image: 'jenkinsci/blueocean'
+    user: root
     volumes: 
       - ./jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
     ports: 
       - 2080:8080
     restart: unless-stopped
