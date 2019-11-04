@@ -1,3 +1,5 @@
 **/gitlab/
 **/jenkins/
 **/node_modules/
+**/sonarqube/
+**/postgres/

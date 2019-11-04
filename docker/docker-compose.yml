@@ -20,3 +20,17 @@ services:
     ports: 
       - 2080:8080
     restart: unless-stopped
+
+  sonarqube:
+    image: 'sonarqube:7.9.1-community'
+    volumes:
+      - ./sonarqube/extensions:/opt/sonarqube/extensions
+      - ./sonarqube/temp:/opt/sonarqube/temp
+    ports:
+      - 3080:9000
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: cicd
