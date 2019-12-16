@@ -10,6 +10,9 @@ services:
       - 1080:80
       - 1022:22
     restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 172.26.0.2
 
   jenkins:
     image: 'jenkinsci/blueocean'
@@ -111,6 +114,17 @@ services:
       POSTGRES_PASSWORD: awxpass
       POSTGRES_DB: awx
       PGDATA: /var/lib/postgresql/data/pgdata
+
+  projeto_maravilhoso:
+    image: 'node:current-alpine'
+    container_name: projeto_maravilhoso
+    command: sh -c "npm i && npm run build && node output/src/index.js"
+    working_dir: /app
+    restart: unless-stopped
+    ports:
+     - 80:3000
+    volumes:
+     - ./app:/app
 
 networks:
   default:
